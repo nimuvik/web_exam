@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Экзамены</title>
+</head>
+<body>
+    <h1>{{ fio }}, Группа {{ group }}</h1>
+    {% for exam in exams %}
+        <div style="margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
+            <h2>{{ exam.name }}</h2>
+            <p><strong>Дата создания:</strong> {{ exam.created_at }}</p>
+            <p><strong>Дата экзамена:</strong> {{ exam.exam_date }}</p>
+            <p><strong>Пользователи:</strong>
+                {% for user in exam.users.all %}
+                    {{ user.username }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <img src="{{ exam.image.url }}" alt="Задание" width="300">
+        </div>
+    {% endfor %}
+</body>
+</html>
